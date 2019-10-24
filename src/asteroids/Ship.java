@@ -21,7 +21,22 @@ public class Ship extends Element implements KeyListener {
     boolean f = false;
     Sons s = new Sons();
 
-    private Ship(double x, double y, double vx, int width, int height) {
+    static double x = 400;
+    static double y = 700;
+    static int width = 100;
+    static int height = 40;
+    static double vx = 10;
+
+    private static Ship singleton;
+
+    public static Ship getInstance() {
+        if (singleton == null) {
+            singleton = new Ship();
+        }
+        return singleton;
+    }
+
+    private Ship() {
         super(x, y, vx, 0, width, height);
     }
 
