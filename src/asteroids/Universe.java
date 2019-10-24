@@ -125,7 +125,7 @@ public class Universe extends JPanel implements Runnable, KeyListener {
             e.atualizaPosicao(this.getWidth(), this.getHeight());
             e.x += e.vx;
             e.y += e.vy;
-            if (e instanceof Missil) {
+            if (e instanceof Missile) {
                 e.testaColisao(e);
             }
             if (e instanceof Alien) {

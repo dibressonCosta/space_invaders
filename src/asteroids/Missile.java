@@ -4,15 +4,17 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.List;
 
-public class Missil extends Element {
-
+public class Missile extends Element {
+    
+    static int height = 10;
+    static int width = 5;
     final double vmissil = 14;
     int tempvida = 0;
+    
+    boolean vivo = true;
     Sons s = new Sons();
-    public Missil(double x, double y, double angulo) {
-        super(x, y, 0, 0, 4, true);
-        vx = vmissil * Math.sin(-angulo) * -1;
-        vy = vmissil * Math.cos(-angulo) * -1;
+    public Missile(double x, double y, double vy) {
+        super(x, y, 0, vy, 0, 0);
     }
 
     @Override
@@ -26,7 +28,7 @@ public class Missil extends Element {
     }
 
     @Override
-    public boolean testaColisao(Element other) {
+    public boolean collide(Element other) {
         List<Element> lista = Universe.getInstance().listaDeElementos;
         for (Element show : lista) {
             if (show instanceof Alien) {

@@ -72,7 +72,7 @@ public class Ship extends Element implements KeyListener {
         if (!f) {
             s.laserSound.play();
         }
-        Missil tiro = new Missil(this.xti, (this.yti - 13), angulo);
+        Missile tiro = new Missile(this.xti, (this.yti - 13), angulo);
         Universe.getInstance().adicionar.add(tiro);
     }
 
