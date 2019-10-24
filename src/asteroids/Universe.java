@@ -14,28 +14,28 @@ import java.util.List;
 import java.util.Random;
 import javax.swing.JPanel;
 
-public class Universo extends JPanel implements Runnable, KeyListener {
+public class Universe extends JPanel implements Runnable, KeyListener {
 
     boolean keyEnterPressed;
     int score = 0;
-    private static Universo singleton;
-    private Nave nave;
-    ArrayList<Elemento> remover = new ArrayList<>();
-    ArrayList<Elemento> adicionar = new ArrayList<>();
+    private static Universe singleton;
+    private Ship nave;
+    ArrayList<Element> remover = new ArrayList<>();
+    ArrayList<Element> adicionar = new ArrayList<>();
 
-    public static synchronized Universo getInstance() {
+    public static synchronized Universe getInstance() {
         if (singleton == null) {
-            singleton = new Universo();
+            singleton = new Universe();
         }
         return singleton;
     }
 
-    private Universo() {
+    private Universe() {
         preencheUniverso();
     }
     
     public void preencheUniverso() {
-        this.nave = new Nave(0, 3, 350, 250, 0, 0, 4, true);
+        this.nave = new Ship(0, 3, 350, 250, 0, 0, 4, true);
         listaDeElementos = new ArrayList<>();
         this.setFocusable(true);
         this.addKeyListener(nave);
@@ -50,14 +50,14 @@ public class Universo extends JPanel implements Runnable, KeyListener {
             double vy = r.nextDouble() * 2;
             double raio = 25;
             boolean vivo = true;
-            addElemento(new Asteroide(x, y, vx, vy, raio, vivo));
+            addElemento(new Alien(x, y, vx, vy, raio, vivo));
         }
     }
-    List<Elemento> listaDeElementos;
+    List<Element> listaDeElementos;
     boolean gameOver = false;
     long t = 0;
 
-    public void addElemento(Elemento e) {
+    public void addElemento(Element e) {
         listaDeElementos.add(e);
     }
 
@@ -112,7 +112,7 @@ public class Universo extends JPanel implements Runnable, KeyListener {
         g2.drawString(life, 600, 25);
 
         synchronized (lock) {
-            for (Elemento e : listaDeElementos) {
+            for (Element e : listaDeElementos) {
                 e.paint(g2);
             }
         }
@@ -121,14 +121,14 @@ public class Universo extends JPanel implements Runnable, KeyListener {
     private void update() {
         t = t + 1;
         nave.timeLapse();
-        for (Elemento e : listaDeElementos) {
+        for (Element e : listaDeElementos) {
             e.atualizaPosicao(this.getWidth(), this.getHeight());
             e.x += e.vx;
             e.y += e.vy;
             if (e instanceof Missil) {
                 e.testaColisao(e);
             }
-            if (e instanceof Asteroide) {
+            if (e instanceof Alien) {
                 if (e.testaColisao(e)) {
                     e.vx = -e.vx;
                     e.vy = -e.vy;
@@ -188,7 +188,7 @@ public class Universo extends JPanel implements Runnable, KeyListener {
             double vy = r.nextDouble() * 2;
             double raio = 25;
             boolean vivo = true;
-            adicionar.add(new Asteroide(x, y, vx, vy, raio, vivo));
+            adicionar.add(new Alien(x, y, vx, vy, raio, vivo));
         }
     }
     

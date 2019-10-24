@@ -12,7 +12,7 @@ public class TesteUniverso {
         JFrame jf = new JFrame();
         jf.setSize(new Dimension(w, h));
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Universo u = Universo.getInstance();
+        Universe u = Universe.getInstance();
 
         jf.getContentPane().add(u);
 

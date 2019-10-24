@@ -6,19 +6,18 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Asteroide extends Elemento {
+public class Alien extends Element {
 
     Object lock = new Object();
     
-    public Asteroide(double x, double y, double vx, double vy, double raio, boolean vivo) {
-        super(x, y, vx, vy, raio, vivo);
-
+    public Alien(double x, double y, double vx, double vy, int width, int height, boolean vivo) {
+        super(x, y, vx, vy, width, height);
     }
 
     @Override
     public void paint(Graphics2D g2) {
         g2.setColor(Color.white);
-        g2.drawOval((int) x, (int) y, (int) raio, (int) raio);
+        
 
     }
     ArrayList remover = new ArrayList();

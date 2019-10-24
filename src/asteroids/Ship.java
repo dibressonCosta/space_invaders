@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 
-public class Nave extends Elemento implements KeyListener {
+public class Ship extends Element implements KeyListener {
 
     boolean keyRightPressed;
     boolean keyLeftPressed;
@@ -21,12 +21,8 @@ public class Nave extends Elemento implements KeyListener {
     boolean f = false;
     Sons s = new Sons();
 
-    public Nave(double angulo, int vida,
-            double x, double y, double vx, double vy, double raio, boolean vivo) {
-        super(x, y, vx, vy, raio, vivo);
-        this.angulo = angulo;
-        this.vida = vida;
-        this.raio = 13;
+    private Ship(double x, double y, double vx, int width, int height) {
+        super(x, y, vx, 0, width, height);
     }
 
     public void timeLapse() {
@@ -62,28 +58,26 @@ public class Nave extends Elemento implements KeyListener {
             s.laserSound.play();
         }
         Missil tiro = new Missil(this.xti, (this.yti - 13), angulo);
-        Universo.getInstance().adicionar.add(tiro);
+        Universe.getInstance().adicionar.add(tiro);
     }
 
-    public void velocidade(double v) {
+    private void velocidade(double v) {
         vx += v * Math.sin(angulo);
         vy -= v * Math.cos(angulo);
         int vmax = 7;
         vx = Math.min(vx, vmax);
-        vy = Math.min(vy, vmax);
         vx = Math.max(vx, -vmax);
-        vy = Math.max(vy, -vmax);
     }
 
     public void fshow() {
         if (f == false) {
             f = true;
-            Universo.getInstance().f = true;
+            Universe.getInstance().f = true;
             s.music(true);
         } else if (f == true) {
             f = false;
             keySpacePressed = false;
-            Universo.getInstance().f = false;
+            Universe.getInstance().f = false;
             s.music(false);
         }
     }
@@ -166,7 +160,7 @@ public class Nave extends Elemento implements KeyListener {
     }
 
     @Override
-    public boolean testaColisao(Elemento other) {
+    public boolean testaColisao(Element other) {
         double soma = Math.pow((other.x - this.x), 2) + Math.pow((other.y - this.y), 2);
         double d = Math.sqrt(soma);
         if (f) {
