@@ -78,7 +78,7 @@ public class Ship extends Element implements KeyListener {
 
     private void velocidade(double v) {
         vx += v * Math.sin(angulo);
-        vy -= v * Math.cos(angulo);
+        
         int vmax = 7;
         vx = Math.min(vx, vmax);
         vx = Math.max(vx, -vmax);
@@ -174,28 +174,28 @@ public class Ship extends Element implements KeyListener {
         g2.rotate(-angulo, x, y);
     }
 
-    @Override
-    public boolean testaColisao(Element other) {
-        double soma = Math.pow((other.x - this.x), 2) + Math.pow((other.y - this.y), 2);
-        double d = Math.sqrt(soma);
-        if (f) {
-            return false;
-        }
-        if (other instanceof Missil) {
-            return false;
-        }
-        if (d <= (this.raio + other.raio)) {
-            double reta1 = -2.6 * ((other.x) - (this.x - 10)) + (this.y + 13);
-            double reta2 = 2.6 * ((other.x) - (this.x + 10)) - (this.y + 13);
-            double reta3 = 1 * (other.x - this.x) + (this.y + 13);
-            if (other.y > (int) reta1) {
-                if (other.y < (int) -reta2) {
-                    if (other.y < (int) reta3) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
+//    @Override
+//    public boolean testaColisao(Element other) {
+//        double soma = Math.pow((other.x - this.x), 2) + Math.pow((other.y - this.y), 2);
+//        double d = Math.sqrt(soma);
+//        if (f) {
+//            return false;
+//        }
+//        if (other instanceof Missil) {
+//            return false;
+//        }
+//        if (d <= (this.raio + other.raio)) {
+//            double reta1 = -2.6 * ((other.x) - (this.x - 10)) + (this.y + 13);
+//            double reta2 = 2.6 * ((other.x) - (this.x + 10)) - (this.y + 13);
+//            double reta3 = 1 * (other.x - this.x) + (this.y + 13);
+//            if (other.y > (int) reta1) {
+//                if (other.y < (int) -reta2) {
+//                    if (other.y < (int) reta3) {
+//                        return true;
+//                    }
+//                }
+//            }
+//        }
+//        return false;
+//    }
 }
